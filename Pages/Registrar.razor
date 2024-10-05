@@ -1,0 +1,60 @@
+@page "/registrar"
+@inject NavigationManager Navigation
+
+<h3>Registrar Nueva Tardanza</h3>
+
+<EditForm Model="@nuevaTardanza" OnValidSubmit="RegistrarTardanza">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="m-3">
+        <label for="matricula">Matricula:</label>
+        <InputText id="matricula" @bind-Value="nuevaTardanza.Matricula" class="form-control" />
+    </div>
+
+    <div class="m-3">
+        <label for="nombre">nombre:</label>
+        <InputText id="nombre" @bind-Value="nuevaTardanza.Nombre" class="form-control" />
+    </div>
+
+    <div class="m-3">
+        <label for="apaellido">Apellido:</label>
+        <InputText id="apellido" @bind-Value="nuevaTardanza.Apellido" class="form-control" />
+    </div>
+
+    <div class="m-3">
+        <label for="curso">Curso:</label>
+        <InputText id="curso" @bind-Value="nuevaTardanza.Curso" class="form-control" />
+    </div>
+
+    <div class="m-3">
+        <label for="motivo">Motivo:</label>
+        <InputText id="motivo" @bind-Value="nuevaTardanza.Motivo" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Registrar</button>
+</EditForm>
+
+@code {
+    private Tardanza nuevaTardanza = new Tardanza();
+
+    private void RegistrarTardanza()
+    {
+        // Guradar la nueva tardanza (logica pendiente)
+        nuevaTardanza.FechaHora = DateTime.Now;
+
+        // Regresar a la lista
+        Navigation.NavigateTo("/tardanzas");
+    }
+
+    public class Tardanza
+    {
+        public string Matricula {get; set; } = string.Empty;
+        public string Nombre {get; set; } = string.Empty;
+        public string Apellido {get; set; } = string.Empty;
+        public string Curso {get; set; } = string.Empty;
+        public string Motivo {get; set; } = string.Empty;
+        public DateTime FechaHora {get; set; }
+    }
+
+}

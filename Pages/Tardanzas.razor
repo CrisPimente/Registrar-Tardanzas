@@ -1,0 +1,59 @@
+@page "/tardanzas"
+@inject NavigationManager Navigation
+
+<h3>Lista de Tardanzas</h3>
+
+<table class="table-striped">
+    <thead>
+        <tr>
+            <th>Matricula</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Curso</th>
+            <th>Motivo</th>
+            <th>Fecha y Hora</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tardanzas in tardanzas)
+        {
+            <tr>
+                <td>@tardanzas.Matricula</td>
+                <td>@tardanzas.Nombre</td>
+                <td>@tardanzas.Apellido</td>
+                <td>@tardanzas.Curso</td>
+                <td>@tardanzas.Motivo</td>
+                <td>@tardanzas.FechaHora</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button class="btn btn-primary" @onclick="RegistrarTardanza">Registra Nueva Tardanza</button>
+
+@code {
+    private List<Tardanza> tardanzas = new List<Tardanza>();
+
+    protected override void OnInitialized()
+    {
+        // simulamos datos cargados
+        tardanzas.Add(new Tardanza { Matricula = "20231176", Nombre = "Cristian", Apellido = "Pimentel", Curso = "8b", Motivo = "Porque Amadis (el mejor) puso una tarea larguisima", FechaHora = DateTime.Now});
+    }
+
+
+    private void RegistrarTardanza()
+    {
+        Navigation.NavigateTo("/registrar");
+    }
+
+    public class Tardanza
+    {
+        public string Matricula {get; set; } = string.Empty;
+        public string Nombre {get; set; } = string.Empty;
+        public string Apellido {get; set; } = string.Empty;
+        public string Curso {get; set; } = string.Empty;
+        public string Motivo {get; set; } = string.Empty;
+        public DateTime FechaHora {get; set; }
+    }
+
+}
